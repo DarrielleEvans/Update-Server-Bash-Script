@@ -1,0 +1,15 @@
+#!/bin/bash
+# Darrielle Evans
+# August 30, 2023
+# This script will update the server every Friday at 11pm. The number of packages that were updated will be displayed in a newly created file.
+
+#cron.allow did not exist. I created the file and added the ubuntu user which allowed me to create a cron job
+#In order to schedule the script, I used cron -e which opened the editor that allowed me to schedule the script to run every Friday at 11pm. I used 0 23 ** 5.
+# I used crontab -l to see if the job is scheduled correctly
+# In the next few lines, I will go over the commands I used and what they are doing.
+# sudo apt update - This command returns a list of packages that has updates
+# 2>/dev/null - These commands redirect the standard error message to the null file so that it doesnt appear in our script
+#  tail -n 1 -This command returns the last line from the output sudo apt update
+# tee upgradeList.txt - read the input from the tail command and printed the information as output and it sent the output to the upgradeList file. 
+# "upgradeList_$(date +%Y-%m-%d).txt" - This command uses the substitution command method. It is replacing the command inside of the parentheses with date output. It is then creating the file with the date added to the file name
+sudo apt update 2>/dev/null | tail -n 1 | tee "upgradeList_$(date +%Y-%m-%d).txt"
