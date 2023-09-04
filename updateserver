@@ -12,4 +12,4 @@
 #  tail -n 1 -This command returns the last line from the output sudo apt update
 # tee upgradeList.txt - read the input from the tail command and printed the information as output and it sent the output to the upgradeList file. 
 # "upgradeList_$(date +%Y-%m-%d).txt" - This command uses the substitution command method. It is replacing the command inside of the parentheses with date output. It is then creating the file with the date added to the file name
-sudo apt update 2>/dev/null | tail -n 1 | tee "upgradeList_$(date +%Y-%m-%d).txt"
+sudo apt update && sudo apt-get upgrade 2>/dev/null | tail -n 1 | tee "upgradeList_$(date +%Y-%m-%d).txt"
